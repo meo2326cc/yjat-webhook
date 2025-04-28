@@ -37,7 +37,7 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
           },
           {
             type: "text",
-            text: "服務：",
+            text: "服務名稱：",
             wrap: true,
             margin: "8px",
             weight: "bold",
