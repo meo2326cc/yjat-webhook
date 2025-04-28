@@ -50,7 +50,7 @@ app.post("/webhook", async (req, res) => {
   }
 
   if (action === "opened") {
-    const repoName = repository.full_name;
+    const repoName = repository.full_name; // 暫時未使用
     const prNumber = pull_request.number;
     const prTitle = pull_request.title;
     const prBody = pull_request.body || "空白";
@@ -71,7 +71,7 @@ app.post("/webhook", async (req, res) => {
     const name = check_run.name;
     const title = check_run.output.title || "空白";
     const summary = check_run.output.summary || "空白";
-    const repoName = repository.full_name;
+    const repoName = repository.full_name; // 暫時未使用
     const repoDesc = repository.description || "--";
 
     client.pushMessage({
