@@ -23,7 +23,7 @@ export default function merged(repoName, prNumber, prTitle, prBody, mergedBy, br
         contents: [
           {
             type: "text",
-            text: `${repoName}`,
+            text: `#${prNumber}: ${prTitle} 已通過！`,
             wrap: true,
             margin: "none",
             weight: "bold",
@@ -34,20 +34,10 @@ export default function merged(repoName, prNumber, prTitle, prBody, mergedBy, br
           },
           {
             type: "text",
-            text: "PR：",
-            wrap: true,
-            margin: "8px",
-            weight: "bold",
-          },
-          {
-            type: "text",
-            text: `#${prNumber}: ${prTitle}`
-          },
-          {
-            type: "text",
             text: "分支：",
             wrap: true,
             weight: "bold",
+            margin: "8px",
           },
           {
             type: "text",

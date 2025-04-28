@@ -24,7 +24,7 @@ export default function open(repoName, prNumber, prTitle, prBody, user, prUrl, b
         contents: [
           {
             type: "text",
-            text: `${repoName}`,
+            text: "內容更新",
             wrap: true,
             margin: "none",
             weight: "bold",

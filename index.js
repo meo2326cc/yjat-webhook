@@ -66,13 +66,13 @@ app.post("/webhook", async (req, res) => {
     });
   }
 
-  if (check_run?.name) {
+  if (check_run?.name === "Zeabur") {
     const status = check_run.status;
     const name = check_run.name;
-    const title = check_run.output.title;
-    const summary = check_run.output.summary;
+    const title = check_run.output.title || "空白";
+    const summary = check_run.output.summary || "空白";
     const repoName = repository.full_name;
-    const repoDesc = repository.description;
+    const repoDesc = repository.description || "--";
 
     client.pushMessage({
       to: process.env.GROUP_ID,
