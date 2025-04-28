@@ -10,9 +10,10 @@ export default function open(repoName, prNumber, prTitle, prBody, user, prUrl, b
         contents: [
           {
             type: "text",
-            text: `🚚 ${prTitle}`,
+            text: `🚚 #${prNumber} ${prTitle}`,
             weight: "bold",
             size: "md",
+            wrap: true,
           },
         ],
         backgroundColor: "#aecad4",
@@ -34,23 +35,31 @@ export default function open(repoName, prNumber, prTitle, prBody, user, prUrl, b
           },
           {
             type: "text",
-            text: `PR #${prNumber}: ${prTitle}`,
+            text: "建立者：",
             wrap: true,
             margin: "8px",
+            weight: "bold"
           },
           {
             type: "text",
-            text: `建立者: ${user}`,
+            text: user,
             wrap: true,
           },
           {
             type: "text",
-            text: `分支: ${branch}`,
+            text: "分支：",
+            wrap: true,
+            weight: "bold",
+          },
+          {
+            type: "text",
+            text: branch,
             wrap: true,
           },
           {
             type: "text",
-            text: "此 PR 包含: ",
+            text: "此 PR 包含：",
+            weight: "bold",
           },
           {
             type: "text",

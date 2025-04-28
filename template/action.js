@@ -11,10 +11,11 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
           {
             type: "text",
             text: `${
-              action === "completed" && status === "completed" ? "✅" : "🚬"
+              status === "completed" ? "✅" : "🚬"
             } Action: ${status}`,
             weight: "bold",
             size: "md",
+            wrap: true,
           },
         ],
         backgroundColor: "#bdaed4",
@@ -36,24 +37,43 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
           },
           {
             type: "text",
-            text: `服務 ${name}`,
+            text: "服務：",
             wrap: true,
             margin: "8px",
+            weight: "bold",
           },
           {
             type: "text",
-            text: `title: ${title}`,
+            text: name,
             wrap: true,
           },
           {
             type: "text",
-            text: `summary: ${summary}`,
+            text: "title：",
+            wrap: true,
+            weight: "bold",
+          },
+          {
+            type: "text",
+            text: title,
             wrap: true,
           },
           {
             type: "text",
-            text: "repository:",
+            text: "summary：",
             wrap: true,
+            weight: "bold",
+          },
+          {
+            type: "text",
+            text: summary,
+            wrap: true,
+          },
+          {
+            type: "text",
+            text: "repository：",
+            wrap: true,
+            weight: "bold",
           },
           {
             type: "text",
