@@ -34,23 +34,41 @@ export default function merged(repoName, prNumber, prTitle, prBody, mergedBy, br
           },
           {
             type: "text",
-            text: `PR #${prNumber}: ${prTitle}`,
+            text: "PR：",
             wrap: true,
             margin: "8px",
+            weight: "bold",
           },
           {
             type: "text",
-            text: `分支: ${branch}`,
+            text: `#${prNumber}: ${prTitle}`
+          },
+          {
+            type: "text",
+            text: "分支：",
+            wrap: true,
+            weight: "bold",
+          },
+          {
+            type: "text",
+            text: branch,
             wrap: true,
           },
           {
             type: "text",
-            text: `合併者: ${mergedBy}`,
+            text: "合併者：",
+            wrap: true,
+            weight: "bold",
+          },
+          {
+            type: "text",
+            text: mergedBy,
             wrap: true,
           },
           {
             type: "text",
-            text: "更新項目: ",
+            text: "更新項目：",
+            weight: "bold",
           },
           {
             type: "text",
