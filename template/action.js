@@ -1,4 +1,4 @@
-  function action(action, status, name, title, summary, repoName, repoDesc) {
+function action(action, status, name, title, summary, repoName, repoDesc) {
   return {
     type: "flex",
     altText: `action ${action}: ${status}`,
