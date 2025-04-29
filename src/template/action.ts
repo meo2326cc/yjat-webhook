@@ -1,4 +1,18 @@
-function action(action, status, name, title, summary, repoName, repoDesc, conclusion) {
+// 導入 LINE SDK 的型別
+import { FlexMessage } from "@line/bot-sdk/dist/messaging-api/model/flexMessage.js";
+
+interface ActionParams {
+  action: string;
+  status: string;
+  name: string;
+  title: string;
+  summary: string;
+  repoName: string;
+  repoDesc: string;
+  conclusion: string;
+}
+
+function action({action, status, name, title, summary, repoName, repoDesc, conclusion}: ActionParams): FlexMessage {
 
   let conclusionSymbol = {
     emoji: '🚬',
@@ -19,16 +33,16 @@ function action(action, status, name, title, summary, repoName, repoDesc, conclu
   }
 
   return {
-    type: "flex",
+    type: "flex" as const,
     altText: `${conclusionSymbol.emoji} 部署階段，狀態：${status}`,
     contents: {
-      type: "bubble",
+      type: "bubble" as const,
       header: {
-        type: "box",
-        layout: "vertical",
+        type: "box" as const,
+        layout: "vertical" as const,
         contents: [
           {
-            type: "text",
+            type: "text" as const,
             text: `${conclusionSymbol.emoji} 部署階段，狀態：${status}`,
             weight: "bold",
             size: "md",
@@ -38,11 +52,11 @@ function action(action, status, name, title, summary, repoName, repoDesc, conclu
         backgroundColor: "#bdaed4",
       },
       body: {
-        type: "box",
-        layout: "vertical",
+        type: "box" as const,
+        layout: "vertical" as const,
         contents: [
           {
-            type: "text",
+            type: "text" as const,
             text: `${conclusion}`,
             wrap: true,
             margin: "none",
@@ -50,66 +64,66 @@ function action(action, status, name, title, summary, repoName, repoDesc, conclu
             color: conclusionSymbol.color
           },
           {
-            type: "separator",
+            type: "separator" as const,
             margin: "8px",
           },
           {
-            type: "text",
+            type: "text" as const,
             text: "服務名稱：",
             wrap: true,
             margin: "8px",
             weight: "bold",
           },
           {
-            type: "text",
+            type: "text" as const,
             text: name,
             wrap: true,
           },
           {
-            type: "text",
+            type: "text" as const,
             text: "動作",
             wrap: true,
             weight: "bold",
           },
           {
-            type: "text",
+            type: "text" as const,
             text: action,
             wrap: true,
           },
           {
-            type: "text",
+            type: "text" as const,
             text: "標題",
             wrap: true,
             weight: "bold",
           },
           {
-            type: "text",
+            type: "text" as const,
             text: title,
             wrap: true,
           },
           {
-            type: "text",
+            type: "text" as const,
             text: "摘要",
             wrap: true,
             weight: "bold",
           },
           {
-            type: "text",
+            type: "text" as const,
             text: summary,
             wrap: true,
           },
           {
-            type: "text",
+            type: "text" as const,
             text: "專案：",
             wrap: true,
             weight: "bold",
           },
           {
-            type: "text",
+            type: "text" as const,
             text: `${repoName}`,
           },
           {
-            type: "text",
+            type: "text" as const,
             text: `${repoDesc}`,
           }
         ],
@@ -125,16 +139,16 @@ function action(action, status, name, title, summary, repoName, repoDesc, conclu
   };
 }
 
-function footer(action, conclusion) {
+function footer(action: string, conclusion: string): any | null {
   if (action === "completed" && conclusion === "success") {
     return {
-      type: "box",
-      layout: "vertical",
+      type: "box" as const,
+      layout: "vertical" as const,
       contents: [
         {
-          type: "button",
+          type: "button" as const,
           action: {
-            type: "uri",
+            type: "uri" as const,
             label: "開啟網站",
             uri: "https://yjat.zeabur.app/",
           },
