@@ -1,7 +1,7 @@
 export default function merged(repoName, prNumber, prTitle, prBody, mergedBy, branch) {
   return {
     type: "flex",
-    altText: `${mergedBy} merged merge request ${prTitle} `,
+    altText: `PR #${prNumber} 審閱已通過，即將部署！`,
     contents: {
       type: "bubble",
       header: {
@@ -23,7 +23,7 @@ export default function merged(repoName, prNumber, prTitle, prBody, mergedBy, br
         contents: [
           {
             type: "text",
-            text: `#${prNumber}: ${prTitle} 已通過！`,
+            text: `#${prNumber}: ${prTitle} 已合併！`,
             wrap: true,
             margin: "none",
             weight: "bold",
@@ -57,7 +57,7 @@ export default function merged(repoName, prNumber, prTitle, prBody, mergedBy, br
           },
           {
             type: "text",
-            text: "更新項目：",
+            text: "內容：",
             weight: "bold",
           },
           {

@@ -1,7 +1,7 @@
 export default function open(repoName, prNumber, prTitle, prBody, user, prUrl, branch) {
   return {
     type: "flex",
-    altText: `新版本合併請求 ${prNumber} ${prTitle}`,
+    altText: `新版本合併請求： #${prNumber} ${prTitle}`,
     contents: {
       type: "bubble",
       header: {
