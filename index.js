@@ -69,6 +69,7 @@ app.post("/webhook", async (req, res) => {
   if (check_run?.name === "Zeabur") {
     const status = check_run.status;
     const name = check_run.name;
+    const conclusion = check_run?.conclusion || "pending";
     const title = check_run.output.title || "空白";
     const summary = check_run.output.summary || "空白";
     const repoName = repository.full_name; // 暫時未使用
@@ -84,7 +85,8 @@ app.post("/webhook", async (req, res) => {
           title,
           summary,
           repoName,
-          repoDesc
+          repoDesc,
+          conclusion
         ),
       ],
     });
