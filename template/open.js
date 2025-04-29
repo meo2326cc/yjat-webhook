@@ -1,7 +1,7 @@
 export default function open(repoName, prNumber, prTitle, prBody, user, prUrl, branch) {
   return {
     type: "flex",
-    altText: `${user} opened merge request ${prTitle} `,
+    altText: `新版本合併請求 ${prNumber} ${prTitle}`,
     contents: {
       type: "bubble",
       header: {
@@ -24,7 +24,7 @@ export default function open(repoName, prNumber, prTitle, prBody, user, prUrl, b
         contents: [
           {
             type: "text",
-            text: "內容更新",
+            text: "新版本合併請求。",
             wrap: true,
             margin: "none",
             weight: "bold",
@@ -58,7 +58,7 @@ export default function open(repoName, prNumber, prTitle, prBody, user, prUrl, b
           },
           {
             type: "text",
-            text: "此 PR 包含：",
+            text: "內容：",
             weight: "bold",
           },
           {

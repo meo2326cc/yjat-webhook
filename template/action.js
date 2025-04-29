@@ -1,7 +1,26 @@
-function action(action, status, name, title, summary, repoName, repoDesc) {
+function action(action, status, name, title, summary, repoName, repoDesc, conclusion) {
+
+  let conclusionSymbol = {
+    emoji: '🚬',
+    color: '#000000'
+  };
+
+  switch (conclusion) {
+    case 'success':
+      conclusionSymbol.emoji = '✅';
+      conclusionSymbol.color = '#30ba3c';
+      break;
+    case 'failure':
+      conclusionSymbol.emoji = '❌';
+      conclusionSymbol.color = '#bf3636';
+      break;
+    default:
+      break;
+  }
+
   return {
     type: "flex",
-    altText: `action ${action}: ${status}`,
+    altText: `${conclusionSymbol.emoji} 部署階段，狀態：${status}`,
     contents: {
       type: "bubble",
       header: {
@@ -10,9 +29,7 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
         contents: [
           {
             type: "text",
-            text: `${
-              status === "completed" ? "✅" : "🚬"
-            } Action: ${status}`,
+            text: `${conclusionSymbol.emoji} 部署階段，狀態：${status}`,
             weight: "bold",
             size: "md",
             wrap: true,
@@ -26,10 +43,11 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
         contents: [
           {
             type: "text",
-            text: `${action}`,
+            text: `${conclusion}`,
             wrap: true,
             margin: "none",
             weight: "bold",
+            color: conclusionSymbol.color
           },
           {
             type: "separator",
@@ -49,7 +67,18 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
           },
           {
             type: "text",
-            text: "title：",
+            text: "動作",
+            wrap: true,
+            weight: "bold",
+          },
+          {
+            type: "text",
+            text: action,
+            wrap: true,
+          },
+          {
+            type: "text",
+            text: "標題",
             wrap: true,
             weight: "bold",
           },
@@ -60,7 +89,7 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
           },
           {
             type: "text",
-            text: "summary：",
+            text: "摘要",
             wrap: true,
             weight: "bold",
           },
@@ -71,7 +100,7 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
           },
           {
             type: "text",
-            text: "repository：",
+            text: "專案：",
             wrap: true,
             weight: "bold",
           },
@@ -82,10 +111,10 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
           {
             type: "text",
             text: `${repoDesc}`,
-          },
+          }
         ],
       },
-      footer: footer(action, status),
+      footer: footer(action, conclusion),
       styles: {
         hero: {
           separator: true,
@@ -96,8 +125,8 @@ function action(action, status, name, title, summary, repoName, repoDesc) {
   };
 }
 
-function footer(action, status) {
-  if (action === "completed" && status === "completed") {
+function footer(action, conclusion) {
+  if (action === "completed" && conclusion === "success") {
     return {
       type: "box",
       layout: "vertical",
