@@ -2,10 +2,12 @@
   "name": "yjat-webhook",
   "version": "1.0.0",
   "description": "Server for receiving GitHub notifications",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "tsx src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -23,9 +25,12 @@
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
-    "@types/node": "^20.11.16",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.32",
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   }
 }

@@ -2,22 +2,28 @@ import * as line from "@line/bot-sdk";
 import express from "express";
 import "dotenv/config";
 import bodyParser from "body-parser";
-import merged from "./template/merged.js";
-import open from "./template/open.js";
-import actionTemplate from "./template/action.js";
+import merged from "./template/merged";
+import open from "./template/open";
+import actionTemplate from "./template/action";
 // LINE SDK 相關設定
+
+interface config {
+  channelSecret: string;
+  channelAccessToken: string;
+}
+
 const config = {
   channelSecret: process.env.CHANNEL_SECRET,
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
 };
 
-const client = new line.messagingApi.MessagingApiClient(config);
+const client = new line.messagingApi.MessagingApiClient(config as config);
 
 // create Express app
 const app = express();
 
 app.use(bodyParser.json());
-app.use("line-webhook", line.middleware(config));
+app.use("line-webhook", line.middleware(config as config));
 
 // 首頁
 app.get("/", (req, res) => {
@@ -36,16 +42,16 @@ app.post("/webhook", async (req, res) => {
   const { action, pull_request, repository, check_run } = req.body;
 
   if (action === "closed" && pull_request.merged) {
-    const repoName = repository.full_name;
-    const prNumber = pull_request.number;
-    const prTitle = pull_request.title;
+    const repoName = repository.full_name
+    const prNumber = pull_request.number
+    const prTitle = pull_request.title
     const prBody = pull_request.body || "空白";
-    const branch = pull_request.head.ref;
-    const mergedBy = pull_request.merged_by?.login || "unknown";
+    const branch = pull_request.head.ref
+    const mergedBy=  pull_request.merged_by?.login || "unknown";
 
     client.pushMessage({
-      to: process.env.GROUP_ID,
-      messages: [merged(repoName, prNumber, prTitle, prBody, mergedBy, branch)],
+      to: process.env.GROUP_ID as string,
+      messages: [merged({repoName, prNumber, prTitle, prBody, mergedBy, branch})],
     });
   }
 
@@ -59,9 +65,9 @@ app.post("/webhook", async (req, res) => {
     const prUrl = pull_request.html_url;
 
     client.pushMessage({
-      to: process.env.GROUP_ID,
+      to: process.env.GROUP_ID as string,
       messages: [
-        open(repoName, prNumber, prTitle, prBody, user, prUrl, branch),
+        open({repoName, prNumber, prTitle, prBody, user, prUrl, branch}),
       ],
     });
   }
@@ -76,9 +82,9 @@ app.post("/webhook", async (req, res) => {
     const repoDesc = repository.description || "--";
 
     client.pushMessage({
-      to: process.env.GROUP_ID,
+      to: process.env.GROUP_ID as string,
       messages: [
-        actionTemplate(
+        actionTemplate({
           action,
           status,
           name,
@@ -87,7 +93,7 @@ app.post("/webhook", async (req, res) => {
           repoName,
           repoDesc,
           conclusion
-        ),
+        }),
       ],
     });
   }
