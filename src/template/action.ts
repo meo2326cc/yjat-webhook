@@ -12,9 +12,15 @@ interface ActionParams {
   conclusion: string;
 }
 
+interface conclusionSymbol {
+  emoji: string,
+  color: string,
+}
+
 function action({action, status, name, title, summary, repoName, repoDesc, conclusion}: ActionParams): FlexMessage {
 
-  let conclusionSymbol = {
+
+  let conclusionSymbol: conclusionSymbol = {
     emoji: '🚬',
     color: '#000000'
   };
@@ -57,7 +63,7 @@ function action({action, status, name, title, summary, repoName, repoDesc, concl
         contents: [
           {
             type: "text" as const,
-            text: `${conclusion}`,
+            text: `${conclusion.toUpperCase()}`,
             wrap: true,
             margin: "none",
             weight: "bold",
@@ -81,7 +87,7 @@ function action({action, status, name, title, summary, repoName, repoDesc, concl
           },
           {
             type: "text" as const,
-            text: "動作",
+            text: "動作：",
             wrap: true,
             weight: "bold",
           },
@@ -92,7 +98,7 @@ function action({action, status, name, title, summary, repoName, repoDesc, concl
           },
           {
             type: "text" as const,
-            text: "標題",
+            text: "標題：",
             wrap: true,
             weight: "bold",
           },
@@ -103,7 +109,7 @@ function action({action, status, name, title, summary, repoName, repoDesc, concl
           },
           {
             type: "text" as const,
-            text: "摘要",
+            text: "摘要：",
             wrap: true,
             weight: "bold",
           },
